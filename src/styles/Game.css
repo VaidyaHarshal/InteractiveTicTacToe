@@ -1,0 +1,202 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #83a4d4, #b6fbff);
+  overflow: hidden;
+}
+
+.game {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.game:hover {
+  transform: translateY(-5px);
+}
+
+.status {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.winner-animation {
+  animation: celebrate 1s ease infinite;
+}
+
+@keyframes celebrate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.square:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: #f8f9fa;
+}
+
+.square:active {
+  transform: translateY(1px);
+}
+
+.square::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.square:hover::after {
+  opacity: 1;
+}
+
+.square.X {
+  color: #e74c3c;
+  animation: x-appear 0.3s ease;
+}
+
+.square.O {
+  color: #3498db;
+  animation: o-appear 0.3s ease;
+}
+
+@keyframes x-appear {
+  from {
+    transform: scale(0) rotate(180deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes o-appear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.winning-square {
+  animation: win-highlight 1s ease infinite;
+  background: #f1c40f;
+}
+
+@keyframes win-highlight {
+  0% {
+    background: #f1c40f;
+  }
+  50% {
+    background: #f39c12;
+  }
+  100% {
+    background: #f1c40f;
+  }
+}
+
+.reset {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+.reset:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+}
+
+.reset:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 480px) {
+  .square {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+  }
+
+  .status {
+    font-size: 1.5rem;
+  }
+}
+
+.winning-line {
+  position: absolute;
+  background: #2ecc71;
+  height: 5px;
+  transform-origin: 0 0;
+  animation: draw-line 0.5s ease-out forwards;
+}
+
+@keyframes draw-line {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
