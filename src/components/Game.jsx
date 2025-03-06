@@ -67,7 +67,7 @@ const Game = () => {
       return;
     }
 
-    if (newCurrentMoves.length === 9) {
+    if (newCurrentMoves.length === 7) {
       let newResetCount = resetCount + 1;
       let updatedCurrentMoves = newMoves.slice(resetCount);
       let updatedNewSquares = computeSquares(updatedCurrentMoves);
